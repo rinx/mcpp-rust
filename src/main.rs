@@ -7,6 +7,7 @@ extern crate rand;
 use rand::Rng;
 use std::f64;
 use std::ops;
+use std::env;
 
 const PI: f64 = 3.141592653589793238462643383279502884197;
 const DTOR: f64 = PI / 180.0;
@@ -246,13 +247,15 @@ fn mcpp_world(mc_input: MCInput) -> MCOutput {
 }
 
 fn main() {
+    let args: Vec<String> = env::args().collect();
+
     let mc_input = MCInput {
-        tau: 1.0,
-        omg: 0.999,
-        asy: 0.85,
-        alb: 0.0,
-        the0: 60.0,
-        nsmpl: 1000000,
+        tau: args[1].trim().parse().expect("Please input correct value: tau"),
+        omg: args[2].trim().parse().expect("Please input correct value: omg"),
+        asy: args[3].trim().parse().expect("Please input correct value: asy"),
+        alb: args[4].trim().parse().expect("Please input correct value: alb"),
+        the0: args[5].trim().parse().expect("Please input correct value: the0"),
+        nsmpl: args[6].trim().parse().expect("Please input correct value: nsmpl"),
     };
 
     println!("tau: {}", mc_input.tau);
